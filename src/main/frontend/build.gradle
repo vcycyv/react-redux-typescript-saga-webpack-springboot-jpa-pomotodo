@@ -1,0 +1,30 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {
+		  url "https://plugins.gradle.org/m2/"
+		} 
+	}
+	dependencies {
+		classpath('com.moowork.gradle:gradle-node-plugin:1.2.0')
+	}
+}
+
+apply plugin: 'com.moowork.node'
+apply plugin: 'java'
+
+node {
+  // If true, it will download node using above parameters.
+  // If false, it will try to use globally installed node.
+  download = false
+
+  // Set the work directory where node_modules should be located
+  nodeModulesDir = file("${project.projectDir}")
+
+}
+
+task webpack (type: NpmTask) {
+  args = ['run', 'build']
+}
+webpack.dependsOn(npmInstall)
+processResources.dependsOn(webpack)
