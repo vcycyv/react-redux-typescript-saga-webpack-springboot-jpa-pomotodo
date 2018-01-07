@@ -10,6 +10,6 @@ To use,
  5. Import gradle project to IDE. (I use eclipse)
  6. create a postgre db named "pomotodo"
  7. Start the mid-tier by running Application.java
- 8. UI development
-&nbsp;&nbsp;8.1 For projection, navigate to /src/main/frontend and run "npm run build", and go to localhost:8080/pomotodo
-&nbsp;&nbsp;8.2 For development (hot reloading),  navigate to /src/main/frontend and run "npm start", and go to localhost:9090
+ 8. UI development <br />
+&nbsp;&nbsp;8.1 For projection, navigate to /src/main/frontend and run "npm run build", and go to localhost:8080/pomotodo <br />
+&nbsp;&nbsp;8.2 For development (hot reloading),  navigate to /src/main/frontend and run "npm start", and go to localhost:9090 <br />
