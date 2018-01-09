@@ -16,3 +16,8 @@ export function* listTasks() {
         tasks
     })
 }
+
+export function* deleteTask(action: Action<Task>) {
+    yield call(ApiTasks.deleteTask, action.payload.id);
+    yield call(listTasks);
+}

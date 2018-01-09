@@ -18,9 +18,9 @@ const addTaskSucess = createAction<Task, Task>(
     (task: Task) => (task)
 );
 
-const deleteTask = createAction<string, string>(
+const deleteTask = createAction<Task, string>(
     DELETE_TASK,
-    (id: string) => id
+    (id: string) => ({id, name})
 );
 
 const listTask = createAction<void>(
