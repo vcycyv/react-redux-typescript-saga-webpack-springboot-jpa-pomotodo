@@ -3,6 +3,8 @@ import { Task } from '../model';
 
 export const ADD_TASK = 'ADD_TASK';
 export const ADD_TASK_SUCCESS = 'ADD_TASK_SUCCESS';
+export const DELETE_TASK = 'DELETE_TASK';
+export const DELETE_TASK_SUCCESS = 'DELETE_TASK_SUCESS';
 export const LIST_TASK = 'LIST_TASK';
 export const LIST_TASK_SUCCESS = 'LIST_TASK_SUCCESS';
 
@@ -14,6 +16,11 @@ const addTask = createAction<Task, string>(
 const addTaskSucess = createAction<Task, Task>(
     ADD_TASK_SUCCESS,
     (task: Task) => (task)
+);
+
+const deleteTask = createAction<Task, string>(
+    DELETE_TASK,
+    (id: string) => ({id, name})
 );
 
 const listTask = createAction<void>(
@@ -29,6 +36,7 @@ const listTaskSuccess = createAction<void>(
 export {
     addTask,
     addTaskSucess,
+    deleteTask,
     listTask,
     listTaskSuccess
 };

@@ -19,4 +19,10 @@ export default class ApiTasks {
             method: 'GET'
         }).then((response) => response.json());
     }
+
+    static deleteTask(id: string) {
+        return fetch(url + '/pomotodo/tasks/' + id, {
+            method: 'DELETE'
+        })
+    }
 }
