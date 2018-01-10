@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Pomo } from '../model';
-import { Label } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 interface TimerProps {
     pomo: Pomo;
@@ -32,7 +32,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
             timer: 0,
             stopWatch: "00:30:00",
             secondsDown: 0,
-            minutesDown: 1,
+            minutesDown: 30,
             hoursDown: 0,
             timerDown: 0
         }
@@ -48,8 +48,9 @@ class Timer extends React.Component<TimerProps, TimerState> {
 
         return(
             <div>
-                <Label>{this.state.time}</Label> <br/>
-                <Label>{this.state.stopWatch}</Label>
+                <h1 style={{display: "inline-block"}}><time>{this.state.stopWatch}</time></h1>
+                <h3 style={{display: "inline-block", paddingLeft: "20px" }}><time>{this.state.time}</time></h3><br/>
+                <Button style={{marginRight: "150px"}} onClick={this.addTime.bind(this, 10)}> +10 </Button>{' '}
             </div>
         );
     }
@@ -99,6 +100,15 @@ class Timer extends React.Component<TimerProps, TimerState> {
 
     timerDown(){
         this.setState(Object.assign({}, this.state, {timerDown: setTimeout(this.countDown.bind(this), 1000)}));
+    }
+
+    addTime(timeLength){
+        if(this.state.minutesDown + timeLength >= 60){
+            this.setState(Object.assign({}, this.state, {minutesDown: this.state.minutesDown + timeLength - 60,
+                hoursDown: this.state.hoursDown + 1}));
+        }else {
+            this.setState(Object.assign({}, this.state, {minutesDown: this.state.minutesDown + timeLength}));
+        }
     }
 }
 

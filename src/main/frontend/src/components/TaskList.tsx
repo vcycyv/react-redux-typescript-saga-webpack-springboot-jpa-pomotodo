@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { Task, Pomo } from '../model';
+import { STATUS_IN_PROGRESS } from '../actions/taskActions'
 import TaskItem from './TaskItem';
 
 interface TaskListProps {
@@ -13,11 +14,13 @@ class TaskList extends React.Component<TaskListProps> {
     render() {
         const tasks = this.props.tasks || [] as Task[];
         const { onDelete, onStartPomo } = this.props;
+        let disableStartAction = tasks.some((task: Task): boolean => {return task.status === STATUS_IN_PROGRESS});
+
         return(
             <ul>
                 {   
                     tasks.map(task =>
-                    <TaskItem task={task} onDelete={onDelete} onStartPomo={onStartPomo} key={task.id}/>
+                    <TaskItem task={task} onDelete={onDelete} onStartPomo={onStartPomo} key={task.id} disableStartAction={disableStartAction}/>
                 )}
             </ul>
         )

@@ -7,9 +7,14 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const LIST_TASK = 'LIST_TASK';
 export const LIST_TASK_SUCCESS = 'LIST_TASK_SUCCESS';
 
+export const STATUS_STOPPED = 'STOPPED';
+export const STATUS_IN_PROGRESS = 'IN_PROGRESS';
+export const STATUS_FINISHED = 'FINISHED';
+
+
 const addTask = createAction<Task, string>(
     ADD_TASK,
-    (name: string) => ({name})
+    (name: string) => ({name, status: STATUS_STOPPED})
 );
 
 const addTaskSucess = createAction<Task, Task>(
@@ -19,7 +24,7 @@ const addTaskSucess = createAction<Task, Task>(
 
 const deleteTask = createAction<Task, string>(
     DELETE_TASK,
-    (id: string) => ({id, name})
+    (id: string) => ({id, name, status})
 );
 
 const listTask = createAction<void>(

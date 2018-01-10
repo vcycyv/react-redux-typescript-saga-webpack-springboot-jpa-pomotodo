@@ -10,7 +10,7 @@ import net.chuyang.pomotodo.Constants.TaskStatus;
 
 @Entity
 public class Task extends StringIdNamedEntity {
-	private TaskStatus status = TaskStatus.NOT_STARTED;
+	private TaskStatus status = TaskStatus.STOPPED;
 	private Date pomoStartTime;
 	private int cost;
 

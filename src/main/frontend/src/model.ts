@@ -1,6 +1,7 @@
 export type Task = {
     id?: string;
     name: string;
+    status: string;
 }
 
 export type Pomo = {
