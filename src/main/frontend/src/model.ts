@@ -9,7 +9,6 @@ export type Pomo = {
 }
 
 export type IState = {
-    tasks: Task[]
+    tasks: Task[];
+    pomo: Pomo;
 }
-
-export type RootTask = Task | Task[];
