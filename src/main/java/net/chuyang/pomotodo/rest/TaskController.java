@@ -33,7 +33,11 @@ public class TaskController {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value="/{id}")
-	public ResponseEntity<Task> update(@RequestBody Task task){
+	public ResponseEntity<Task> update(@PathVariable String id,
+			@RequestBody Task task){
+		task.setId(id);
+		if(repository.findOne(id) == null)
+			throw new IllegalArgumentException("Id is not found.");
 		return new ResponseEntity<>(repository.save(task), HttpStatus.OK);
 	}
 	

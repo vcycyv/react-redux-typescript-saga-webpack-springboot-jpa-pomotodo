@@ -6,7 +6,7 @@ export type Task = {
 
 export type Pomo = {
     taskId: string;
-    startTime: Date;
+    time: Date;
 }
 
 export type IState = {
