@@ -5,6 +5,9 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import net.chuyang.pomotodo.Constants.TaskStatus;
 
@@ -13,7 +16,22 @@ public class Task extends StringIdNamedEntity {
 	private TaskStatus status = TaskStatus.STOPPED;
 	private Date pomoStartTime;
 	private int cost;
+	private Date creationTimeStamp;
+	
+	@PrePersist
+	public void onPrePersist(){
+		setCreationTimeStamp(new Date());
+	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getCreationTimeStamp() {
+		return creationTimeStamp;
+	}
+
+	public void setCreationTimeStamp(Date creationTimeStamp) {
+		this.creationTimeStamp = creationTimeStamp;
+	}
+	
 	@Enumerated(EnumType.STRING) 
 	public TaskStatus getStatus() {
 		return status;

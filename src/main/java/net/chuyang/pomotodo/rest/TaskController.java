@@ -24,7 +24,7 @@ public class TaskController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Task>> getTasks(){
-		return new ResponseEntity<>(Lists.newArrayList(repository.findAll()), HttpStatus.OK);
+		return new ResponseEntity<>(Lists.newArrayList(repository.findAllByOrderByCreationTimeStampAsc()), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
