@@ -1,13 +1,16 @@
 import { handleActions, Action } from 'redux-actions';
 import { Pomo } from '../model';
-import { START_POMO } from '../actions/pomoActions'; 
+import { START_POMO, STOP_POMO } from '../actions/pomoActions'; 
 
-const initialState = {taskId: "", time: new Date()};
+const initialState: Pomo = {taskId: "", timer: false};
 
-export default handleActions<Pomo>(
+export default handleActions<any>(
     {
         [START_POMO]: (state: Pomo, action: Action<Pomo>): Pomo => {
-            return Object.assign({}, state, {taskId: action.payload.taskId, time: new Date()});
+            return Object.assign({}, state, {taskId: action.payload.taskId, timer: true});
+        },
+        [STOP_POMO]: (state: Pomo, action: Action<string>): Pomo => {
+            return Object.assign({}, state, {taskId: action.payload, timer: false});
         },
     }, 
     initialState);

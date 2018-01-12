@@ -14,7 +14,7 @@ export const STATUS_FINISHED = 'FINISHED';
 
 const addTask = createAction<Task, string>(
     ADD_TASK,
-    (name: string) => ({name, status: STATUS_STOPPED})
+    (name: string) => ({name, status: STATUS_STOPPED, cost: 0})
 );
 
 const addTaskSucess = createAction<Task, Task>(
@@ -22,9 +22,9 @@ const addTaskSucess = createAction<Task, Task>(
     (task: Task) => (task)
 );
 
-const deleteTask = createAction<Task, string>(
+const deleteTask = createAction<string, string>(
     DELETE_TASK,
-    (id: string) => ({id, name, status})
+    (id: string) => (id)
 );
 
 const listTask = createAction<void>(

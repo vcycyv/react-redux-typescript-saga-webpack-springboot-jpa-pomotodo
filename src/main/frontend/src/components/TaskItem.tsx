@@ -8,7 +8,7 @@ interface TaskItemProps {
     task: Task;
     onDelete: (id:string) => Dispatch<string>;
     onStartPomo: (id: string) => Dispatch<Pomo>;
-    onStopPomo: (id: String) => Dispatch<Pomo>;
+    onStopPomo: (id: String) => Dispatch<string>;
     disableStartAction: boolean;
 }
 

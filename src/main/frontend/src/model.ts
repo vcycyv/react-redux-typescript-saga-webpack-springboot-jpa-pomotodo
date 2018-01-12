@@ -2,11 +2,13 @@ export type Task = {
     id?: string;
     name: string;
     status: string;
+    cost: number;
+    startTime?: Date;
 }
 
 export type Pomo = {
     taskId: string;
-    time: Date;
+    timer: boolean;
 }
 
 export type IState = {

@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Pomo } from '../model';
 import { Button } from "react-bootstrap";
 
+const defaultMinutesDown = 30;
+
 interface TimerProps {
     pomo: Pomo;
 }
@@ -21,7 +23,6 @@ interface TimerState {
 }
 
 class Timer extends React.Component<TimerProps, TimerState> {
-    
     constructor(props) {
         super(props);
         this.state = {
@@ -30,17 +31,37 @@ class Timer extends React.Component<TimerProps, TimerState> {
             minutes: 0,
             hours: 0,
             timer: 0,
-            stopWatch: "00:30:00",
             secondsDown: 0,
-            minutesDown: 30,
+            minutesDown: defaultMinutesDown,
             hoursDown: 0,
-            timerDown: 0
+            timerDown: 0,
+            stopWatch: "00:00:00",
         }
-     }
+    }
+
+    componentWillMount() {
+        this.setState(Object.assign({}, this.state, {stopWatch: this.getStopWatch(this.state.hoursDown, this.state.minutesDown, this.state.secondsDown)}));
+    }
 
     componentWillReceiveProps(nextprops: TimerProps) {
-        this.timer();
-        this.timerDown();
+        if(nextprops.pomo.timer) {
+            clearTimeout(this.state.timer);
+            clearTimeout(this.state.timerDown);
+            this.timer();
+            this.timerDown();
+        }else {
+            this.setState(Object.assign({}, this.state, {secondsDown: 0, 
+                minutesDown: defaultMinutesDown, 
+                hoursDown: 0, 
+                stopWatch: this.getStopWatch(0, defaultMinutesDown, 0),
+                seconds: 0,
+                minutes: 0,
+                hours: 0,
+                time: this.getTime(0, 0, 0)
+            }));
+            clearTimeout(this.state.timer);
+            clearTimeout(this.state.timerDown);
+        }        
     }
 
     render() {
@@ -65,9 +86,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
                 this.setState(Object.assign({}, this.state, {hours: this.state.hours + 1}));
             }
         }
-        this.setState(Object.assign({}, this.state, {time: (this.state.hours ? (this.state.hours > 9 ? this.state.hours : "0" + this.state.hours) : "00") + ":" +
-            (this.state.minutes ? (this.state.minutes > 9 ? this.state.minutes : "0" + this.state.minutes) : "00") + ":" + 
-            (this.state.seconds > 9 ? this.state.seconds : "0" + this.state.seconds)}));
+        this.setState(Object.assign({}, this.state, {time: this.getTime(this.state.hours, this.state.minutes, this.state.seconds)}));
         this.timer();
     }
 
@@ -82,15 +101,11 @@ class Timer extends React.Component<TimerProps, TimerState> {
             }
         }else if(this.state.secondsDown == 0 && this.state.minutesDown == 0 && this.state.hoursDown == 0) {
             clearTimeout(this.state.timerDown);
-            this.setState(Object.assign({}, this.state, {stopWatch: (this.state.hoursDown ? (this.state.hoursDown > 9 ? this.state.hoursDown : "0" + this.state.hoursDown) : "00") + ":" +
-                (this.state.minutesDown ? (this.state.minutesDown > 9 ? this.state.minutesDown : "0" + this.state.minutesDown) : "00") + ":" + 
-                (this.state.secondsDown > 9 ? this.state.secondsDown : "0" + this.state.secondsDown)}));
+            this.setState(Object.assign({}, this.state, {stopWatch: this.getStopWatch(this.state.hoursDown, this.state.minutesDown, this.state.secondsDown)}));
             alert('Time up');
             return;
         }
-        this.setState(Object.assign({}, this.state, {stopWatch: (this.state.hoursDown ? (this.state.hoursDown > 9 ? this.state.hoursDown : "0" + this.state.hoursDown) : "00") + ":" +
-            (this.state.minutesDown ? (this.state.minutesDown > 9 ? this.state.minutesDown : "0" + this.state.minutesDown) : "00") + ":" + 
-            (this.state.secondsDown > 9 ? this.state.secondsDown : "0" + this.state.secondsDown)}));
+        this.setState(Object.assign({}, this.state, {stopWatch: this.getStopWatch(this.state.hoursDown, this.state.minutesDown, this.state.secondsDown)}));
         this.timerDown();
     }
 
@@ -102,12 +117,24 @@ class Timer extends React.Component<TimerProps, TimerState> {
         this.setState(Object.assign({}, this.state, {timerDown: setTimeout(this.countDown.bind(this), 1000)}));
     }
 
+    getStopWatch(hoursDown: number, minutesDown: number, secondsDown: number): string {
+        return (hoursDown ? (hoursDown > 9 ? hoursDown : "0" + hoursDown) : "00") + ":" +
+                (minutesDown ? (minutesDown > 9 ? minutesDown : "0" + minutesDown) : "00") + ":" + 
+                (secondsDown > 9 ? secondsDown : "0" + secondsDown);
+    }
+
+    getTime(hours: number, minutes: number, seconds: number): string {
+        return (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
+                (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + 
+                (seconds > 9 ? seconds : "0" + seconds);
+    }
+
     addTime(timeLength){
         if(this.state.minutesDown + timeLength >= 60){
             this.setState(Object.assign({}, this.state, {minutesDown: this.state.minutesDown + timeLength - 60,
-                hoursDown: this.state.hoursDown + 1}));
+                hoursDown: this.state.hoursDown + 1, stopWatch: this.getStopWatch(this.state.hoursDown + 1, this.state.minutesDown + timeLength - 60, this.state.secondsDown)}));
         }else {
-            this.setState(Object.assign({}, this.state, {minutesDown: this.state.minutesDown + timeLength}));
+            this.setState(Object.assign({}, this.state, {minutesDown: this.state.minutesDown + timeLength, stopWatch: this.getStopWatch(this.state.hoursDown, this.state.minutesDown + timeLength, this.state.secondsDown)}));
         }
     }
 }
