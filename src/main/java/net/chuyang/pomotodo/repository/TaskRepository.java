@@ -1,5 +1,6 @@
 package net.chuyang.pomotodo.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -9,5 +10,5 @@ import net.chuyang.pomotodo.entity.Task;
 
 @Repository
 public interface TaskRepository extends PagingAndSortingRepository<Task, String> {
-	public List<Task> findAllByOrderByCreationTimeStampAsc();
+	public List<Task> findByFinishTimeAfterOrFinishTimeIsNullOrderByCreationTimeStampAsc(Date yesterday);
 }

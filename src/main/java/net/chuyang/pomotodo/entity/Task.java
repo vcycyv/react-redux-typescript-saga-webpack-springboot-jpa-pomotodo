@@ -14,7 +14,8 @@ import net.chuyang.pomotodo.Constants.TaskStatus;
 @Entity
 public class Task extends StringIdNamedEntity {
 	private TaskStatus status = TaskStatus.STOPPED;
-	private Date pomoStartTime;
+	private Date startTime;
+	private Date finishTime;
 	private int cost;
 	private Date creationTimeStamp;
 	
@@ -41,12 +42,20 @@ public class Task extends StringIdNamedEntity {
 		this.status = status;
 	}
 	
-	public Date getPomoStartTime() {
-		return pomoStartTime;
+	public Date getStartTime() {
+		return startTime;
 	}
 
-	public void setPomoStartTime(Date pomoStartTime) {
-		this.pomoStartTime = pomoStartTime;
+	public void setStartTime(Date pomoStartTime) {
+		this.startTime = pomoStartTime;
+	}
+	
+	public Date getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = finishTime;
 	}
 
 	public int getCost() {

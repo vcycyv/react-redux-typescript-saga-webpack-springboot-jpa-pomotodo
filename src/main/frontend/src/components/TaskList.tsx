@@ -9,21 +9,23 @@ interface TaskListProps {
     onDelete: (id:string) => Dispatch<string>;
     onStartPomo: (id: string) => Dispatch<Pomo>;
     onStopPomo: (id: string) => Dispatch<Pomo>;
+    onFinishPomo: (id: string) => Dispatch<Pomo>;
 }
 
 class TaskList extends React.Component<TaskListProps> {
     render() {
         const tasks = this.props.tasks || [] as Task[];
-        const { onDelete, onStartPomo, onStopPomo } = this.props;
+        const { onDelete, onStartPomo, onStopPomo, onFinishPomo } = this.props;
         let disableStartAction = tasks.some((task: Task): boolean => {return task.status === STATUS_IN_PROGRESS});
 
         return(
-            <ul>
+            <div>
                 {   
                     tasks.map(task =>
-                    <TaskItem task={task} onDelete={onDelete} onStartPomo={onStartPomo} onStopPomo={onStopPomo} key={task.id} disableStartAction={disableStartAction}/>
+                    <TaskItem task={task} onDelete={onDelete} onStartPomo={onStartPomo} onStopPomo={onStopPomo} 
+                        onFinishPomo={onFinishPomo} key={task.id} disableStartAction={disableStartAction}/>
                 )}
-            </ul>
+            </div>
         )
     }
 }

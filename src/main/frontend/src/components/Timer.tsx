@@ -68,10 +68,9 @@ class Timer extends React.Component<TimerProps, TimerState> {
         //const { pomo } = this.props;
 
         return(
-            <div>
-                <h1 style={{display: "inline-block"}}><time>{this.state.stopWatch}</time></h1>
+            <div style={{textAlign: "center"}}>
+                <h1 style={{display: "inline-block"}}><time>{this.state.stopWatch}</time>{' '}<Button style={{marginRight: "150px"}} onClick={this.addTime.bind(this, 10)}> +10 </Button></h1> 
                 <h3 style={{display: "inline-block", paddingLeft: "20px" }}><time>{this.state.time}</time></h3><br/>
-                <Button style={{marginRight: "150px"}} onClick={this.addTime.bind(this, 10)}> +10 </Button>{' '}
             </div>
         );
     }

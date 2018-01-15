@@ -1,12 +1,12 @@
 import { createAction } from 'redux-actions';
-import { Pomo } from '../model';
 
 export const START_POMO = 'START_POMO';
 export const STOP_POMO = 'STOP_POMO';
+export const FINISH_POMO = 'FINISH_POMO';
 
-const startPomo = createAction<Pomo, string>(
+const startPomo = createAction<string, string>(
     START_POMO,
-    (taskId: string) => ({taskId, timer: true})
+    (taskId: string) => (taskId)
 );
 
 const stopPomo = createAction<string, string>(
@@ -14,4 +14,9 @@ const stopPomo = createAction<string, string>(
     (taskId: string) => (taskId)
 );
 
-export { startPomo, stopPomo };
+const finishPomo = createAction<string, string>(
+    FINISH_POMO,
+    (taskId: string) => (taskId)
+)
+
+export { startPomo, stopPomo, finishPomo };

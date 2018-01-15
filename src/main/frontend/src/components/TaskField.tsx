@@ -38,7 +38,7 @@ class TaskField extends React.Component<TaskFieldProps, TaskFieldState> {
 
   render() {
     return(
-      <div>
+      <div style={{display: "inline-block", paddingBottom: "20px", paddingTop: "20px" }}>
           <InputGroup>
             <FormControl type="text" value={this.state.text} onChange={this.handleChange}/>
             <InputGroup.Button>

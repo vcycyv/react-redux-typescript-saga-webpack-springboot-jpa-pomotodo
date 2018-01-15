@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { IState } from '../model';
 import { deleteTask } from '../actions/taskActions';
-import { startPomo, stopPomo } from '../actions/pomoActions';
+import { startPomo, stopPomo, finishPomo } from '../actions/pomoActions';
 import TaskList from '../components/TaskList';
 
 const mapStateToProps = (state:IState) => ({
@@ -19,6 +19,9 @@ const mapDispatchToProps = dispatch => {
         onStopPomo: id => {
             dispatch(stopPomo(id));
         },
+        onFinishPomo: id => {
+            dispatch(finishPomo(id));
+        }
     }
 }
 

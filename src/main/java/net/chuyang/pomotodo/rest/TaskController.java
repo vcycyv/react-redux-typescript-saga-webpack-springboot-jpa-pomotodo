@@ -1,5 +1,6 @@
 package net.chuyang.pomotodo.rest;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class TaskController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Task>> getTasks(){
-		return new ResponseEntity<>(Lists.newArrayList(repository.findAllByOrderByCreationTimeStampAsc()), HttpStatus.OK);
+		return new ResponseEntity<>(Lists.newArrayList(repository.findByFinishTimeAfterOrFinishTimeIsNullOrderByCreationTimeStampAsc(new Date(System.currentTimeMillis()-24*60*60*1000))), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

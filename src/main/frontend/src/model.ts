@@ -4,6 +4,7 @@ export type Task = {
     status: string;
     cost: number;
     startTime?: Date;
+    finishTime?: Date;
 }
 
 export type Pomo = {
