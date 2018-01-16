@@ -1,4 +1,4 @@
-# Read me
+# Read Me
 
 It is a project with both frond end and spring boot based back end.  It uses react, redux, redux-saga(for side-effect), typescript, webpack, spring boot and jpa. 
 
