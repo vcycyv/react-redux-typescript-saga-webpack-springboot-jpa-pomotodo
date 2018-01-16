@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { Task } from '../model';
 
-const url: string = 'http://localhost:8080';
+const url: string = 'http://localhost:9080';
 
 export default class ApiTasks {
      static addTask(task: Task) {

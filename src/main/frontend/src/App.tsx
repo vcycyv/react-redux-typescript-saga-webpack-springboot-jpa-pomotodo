@@ -11,12 +11,16 @@ interface AppProps {
   dispatch: Dispatch<{}>;
 }
 
+declare var Notification: any;
+
 class App extends React.Component<AppProps> {
   componentWillMount() {
     this.props.dispatch(listTask());
   }
 
   render() {
+    if (Notification.permission !== "granted")
+      Notification.requestPermission();
     return (
       <div className="container" style={{maxWidth: "800px"}}>
         <TimerContainer/>

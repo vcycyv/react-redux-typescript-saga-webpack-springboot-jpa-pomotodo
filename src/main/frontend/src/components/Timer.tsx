@@ -22,6 +22,8 @@ interface TimerState {
 
 }
 
+declare var Notification: any;
+
 class Timer extends React.Component<TimerProps, TimerState> {
     constructor(props) {
         super(props);
@@ -69,7 +71,10 @@ class Timer extends React.Component<TimerProps, TimerState> {
 
         return(
             <div style={{textAlign: "center"}}>
-                <h1 style={{display: "inline-block"}}><time>{this.state.stopWatch}</time>{' '}<Button style={{marginRight: "150px"}} onClick={this.addTime.bind(this, 10)}> +10 </Button></h1> 
+                <h1 style={{display: "inline-block"}}><time>{this.state.stopWatch}</time>{' '}
+                    <Button onClick={this.addTime.bind(this, 10)}> +10 </Button>{' '}
+                    <Button style={{marginRight: "150px"}} onClick={this.minusTime.bind(this, 5)}> -5 </Button>
+                </h1> 
                 <h3 style={{display: "inline-block", paddingLeft: "20px" }}><time>{this.state.time}</time></h3><br/>
             </div>
         );
@@ -101,7 +106,13 @@ class Timer extends React.Component<TimerProps, TimerState> {
         }else if(this.state.secondsDown == 0 && this.state.minutesDown == 0 && this.state.hoursDown == 0) {
             clearTimeout(this.state.timerDown);
             this.setState(Object.assign({}, this.state, {stopWatch: this.getStopWatch(this.state.hoursDown, this.state.minutesDown, this.state.secondsDown)}));
-            alert('Time up');
+            if (Notification.permission !== "granted")
+                Notification.requestPermission();
+            else {
+                    new Notification("Time's up", {
+                      body: "Time to take a break!",
+                    });
+            }
             return;
         }
         this.setState(Object.assign({}, this.state, {stopWatch: this.getStopWatch(this.state.hoursDown, this.state.minutesDown, this.state.secondsDown)}));
@@ -134,6 +145,17 @@ class Timer extends React.Component<TimerProps, TimerState> {
                 hoursDown: this.state.hoursDown + 1, stopWatch: this.getStopWatch(this.state.hoursDown + 1, this.state.minutesDown + timeLength - 60, this.state.secondsDown)}));
         }else {
             this.setState(Object.assign({}, this.state, {minutesDown: this.state.minutesDown + timeLength, stopWatch: this.getStopWatch(this.state.hoursDown, this.state.minutesDown + timeLength, this.state.secondsDown)}));
+        }
+    }
+
+    minusTime(timeLength){
+        if(this.state.minutesDown - timeLength < 0 && this.state.hoursDown === 0)
+            return;
+        else if(this.state.minutesDown - timeLength < 0) {
+            this.setState(Object.assign({}, this.state, {minutesDown: this.state.minutesDown - timeLength + 60,
+                hoursDown: this.state.hoursDown - 1, stopWatch: this.getStopWatch(this.state.hoursDown - 1, this.state.minutesDown - timeLength + 60, this.state.secondsDown)}));
+        }else {
+            this.setState(Object.assign({}, this.state, {minutesDown: this.state.minutesDown - timeLength, stopWatch: this.getStopWatch(this.state.hoursDown, this.state.minutesDown - timeLength, this.state.secondsDown)}));
         }
     }
 }

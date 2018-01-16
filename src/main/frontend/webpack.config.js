@@ -45,7 +45,7 @@ if (TARGET === 'start' || !TARGET) {
             port: 9090,
             proxy: {
                 '/pomotodo': {
-                    target: 'http://localhost:8080',
+                    target: 'http://localhost:9080',
                     secure: false,
                     prependPath: false
                 }
