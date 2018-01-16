@@ -11,7 +11,7 @@ To use,
  6. create a postgre db named "pomotodo"
  7. Start the mid-tier by running Application.java
  8. UI development <br />
-&nbsp;&nbsp;8.1 For projection, navigate to /src/main/frontend and run "npm run build", and go to localhost:9080/pomotodo <br />
+&nbsp;&nbsp;8.1 For production, navigate to /src/main/frontend and run "npm run build", and go to localhost:9080/pomotodo <br />
 &nbsp;&nbsp;8.2 For development (hot reloading),  navigate to /src/main/frontend and run "npm start", and go to localhost:9090 <br />
 
 ![alt text](https://imgur.com/2ezIhcW.png)
