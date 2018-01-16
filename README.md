@@ -14,4 +14,4 @@ To use,
 &nbsp;&nbsp;8.1 For projection, navigate to /src/main/frontend and run "npm run build", and go to localhost:9080/pomotodo <br />
 &nbsp;&nbsp;8.2 For development (hot reloading),  navigate to /src/main/frontend and run "npm start", and go to localhost:9090 <br />
 
-![alt text](https://imgur.com/2ezIhcW)
+![alt text](https://imgur.com/2ezIhcW.png)
