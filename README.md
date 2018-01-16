@@ -1,6 +1,6 @@
 # Read me
 
-It is a project with both frond end and spring boot based back end.  It uses react, redux, redux-saga(for side-effect), typescript, webpack, spring boot and jpa. It can serve as a starting point for a typical web application. 
+It is a project with both frond end and spring boot based back end.  It uses react, redux, redux-saga(for side-effect), typescript, webpack, spring boot and jpa. 
 
 To use,
  1. clone/download the project
@@ -13,3 +13,5 @@ To use,
  8. UI development <br />
 &nbsp;&nbsp;8.1 For projection, navigate to /src/main/frontend and run "npm run build", and go to localhost:9080/pomotodo <br />
 &nbsp;&nbsp;8.2 For development (hot reloading),  navigate to /src/main/frontend and run "npm start", and go to localhost:9090 <br />
+
+![alt text](https://imgur.com/2ezIhcW)
