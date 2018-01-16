@@ -5,7 +5,7 @@ It is a project with both frond end and spring boot based back end.  It uses rea
 To use,
  1. clone/download the project
  2. run "gradle wrapper" 
- 3. run "gradle build" (It will download jar files and js modules dependency)
+ 3. run "gradle build" (It will download jar files and js module dependency)
  4. Before importing the project into IDE,  comment out "//include 'src:main:frontend" from settings.gradle
  5. Import gradle project to IDE. (I use eclipse)
  6. create a postgre db named "pomotodo"
