@@ -15,3 +15,11 @@ To use,
 &nbsp;&nbsp;8.2 For development (hot reloading),  navigate to /src/main/frontend and run "npm start", and go to localhost:9090 <br />
 
 ![alt text](https://imgur.com/2ezIhcW.png)
+
+It is a pomodoro tool, which has two watches. One is stop watch that triggers notification (chrome brower) once the time is up. The other indicates how much time has lasted in the current pomodoro. This watch doesn't stop until you cut off the task by clicking the 'stop' button. It is designed this way, so you don't have to interrupt immediately after time is up. 
+
+You can adjust the length of pomodoro by adding 10 minutes or decreasing 5 minutes. 
+
+It keeps track how much time it takes in total for a task.
+
+It only displays finished tasks that done in the last 24 hours.
